@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Rodrigo\Documents\Atmel Studio\7.0\AssemblerApplication3\AssemblerApplication3\main.asm Thu Sep 14 19:52:33 2023
+AVRASM ver. 2.2.8  C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm Tue Sep 19 20:47:49 2023
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.1.506\avrasm\inc\m328Pdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.1.506\avrasm\inc\m328Pdef.inc'
@@ -985,19 +985,21 @@ AVRASM ver. 2.2.8  C:\Users\Rodrigo\Documents\Atmel Studio\7.0\AssemblerApplicat
                                  
                                  ; ***** END OF FILE ******************************************************
                                  
-                                 ; Ejemplo_Interrupción_Timer0.asm
+                                 ; lab2.asm
                                  ;
-                                 ; Created: 12/9/2021 22:00:38
-                                 ; Author : curso de microprocesadores
+                                 ; Created: 19/9
+                                 ; Author : rperdomo
                                  ;
                                  
                                  
                                  
                                  ; Empiezo con los vectores de interrupción
-                                 .ORG 0x0000
-000000 940c 001e                 	jmp		start		;dirección de comienzo (vector de reset)  
-                                 .ORG 0x001C 
-00001c 940c 0030                 	jmp		_tmr0_int	;salto atención a rutina de comparación A del timer 0
+                                 .ORG 0x0000 ;rutina estándar
+000000 940c 001e                 	jmp		start		;dirección de comienzo (vector de reset)
+                                 .org	0x0008 ;rutina de interrupcion externa
+000008 940c 0066                 	jmp		interrupcion_externa 
+                                 .ORG 0x001C ;rutina del timer
+00001c 940c 0044                 	jmp		_tmr0_int	;salto atención a rutina de comparación A del timer 0
                                  
                                  
                                  ; ---------------------------------------------------------------------------------------
@@ -1005,38 +1007,58 @@ AVRASM ver. 2.2.8  C:\Users\Rodrigo\Documents\Atmel Studio\7.0\AssemblerApplicat
                                  start:
                                  ;configuro los puertos:
                                  ;	PB2 PB3 PB4 PB5	- son los LEDs del shield
-00001e e30d                          ldi		r16,	0b00111101	
-00001f b904                      	out		DDRB,	r16			;4 LEDs del shield son salidas
-000020 b905                      	out		PORTB,	r16			;apago los LEDs
+00001e e30d                          ldi	r16,	0b00111101	;edefino los led que voy a usar
+00001f b904                      	out	DDRB,	r16			;los defino como salida
+000020 b905                      	out	PORTB,	r16			;apago los LEDs
                                  
-000021 e000                      	ldi		r16,	0b00000000	
-000022 b907                      	out		DDRC,	r16			;3 botones del shield son entradas
+000021 e000                      	ldi	r16,	0b00000000	
+000022 b907                      	out	DDRC,	r16			;3 botones del shield son entradas
                                  ;-------------------------------------------------------------------------------------
                                  
                                  ;Configuro el TMR0 y su interrupcion.
-000023 e002                      	ldi		r16,	0b00000010	
-000024 bd04                      	out		TCCR0A,	r16			;configuro para que cuente hasta OCR0A y vuelve a cero (reset on compare), ahí dispara la interrupción
-000025 e005                      	ldi		r16,	0b00000101	
-000026 bd05                      	out		TCCR0B,	r16			;prescaler = 1024
-000027 e70c                      	ldi		r16,	124	
-000028 bd07                      	out		OCR0A,	r16			;comparo con 125
-000029 e002                      	ldi		r16,	0b00000010	
-00002a 9300 006e                 	sts		TIMSK0,	r16			;habilito la interrupción (falta habilitar global)
+000023 e002                      	ldi	r16,	0b00000010	
+000024 bd04                      	out	TCCR0A,	r16			;configuro para que cuente hasta OCR0A y vuelve a cero (reset on compare), ahí dispara la interrupción
+000025 e005                      	ldi	r16,	0b00000101	;
+000026 bd05                      	out	TCCR0B,	r16			;prescaler = 1024
+000027 e70c                      	ldi	r16,	124			;
+000028 bd07                      	out	OCR0A,	r16			;comparo con 124, cuando esto llega a 1024 interrumpe, entonces el led hace lo que le pedimos, pero no va a hacer nada si no habilitamos las int globales
+000029 e002                      	ldi	r16,	0b00000010	;
+00002a 9300 006e                 	sts	TIMSK0,	r16			;habilito la interrupción (falta habilitar global)
                                  ;-------------------------------------------------------------------------------------
                                  ;Inicializo algunos registros que voy a usar como variables.
-00002c e080                      	ldi		r24,	0x00		;inicializo r24 para un contador genérico
+00002c e080                      	ldi	r24,	0x00		;inicializo r24 para un contador genérico
+00002d e020                      	ldi	r18,	0;mi registro de incrementos
+00002e e030                      	ldi	r19,	0;el registro del segundo bit
+00002f e040                      	ldi	r20,	0;el registro del tercer bit
                                  ;-------------------------------------------------------------------------------------
+000030 e002                      	ldi	r16, 0b00000010
+000031 9300 0068                 	sts	PCICR,r16; habilito la interrupcion
+000033 e004                      	ldi	r16, 0b00000100
+000034 9300 006c                 	sts	PCMSK1,r16; habilito la interrupt del portC
+                                 
                                  
                                  
                                  ;Programa principal ... acá puedo hacer lo que quiero
                                  
                                  comienzo:
-00002d 9478                      	sei		;habilito las interrupciones globales(set interrupt flag) en SREG
-00002e 9588                      	sleep
+000036 9478                      	sei							;habilito las interrupciones globales(set interrupt flag)
                                  
                                  loop1:
-00002f cfff                      rjmp loop1
-                                 
+000037 0000                      	nop
+000038 0000                      	nop
+000039 0000                      	nop
+00003a 0000                      	nop
+00003b 6f0f                      	ori r16, 0xFF
+00003c 0000                      	nop
+00003d 0000                      	nop
+00003e 0000                      	nop
+00003f f7b9                      	brne loop1  //branch not equal 0 la zero flag es 0 salta si la operacion anterior da cero por ende va a loop 2
+                                 loop2:
+000040 0000                      	nop
+000041 0000                      	nop
+000042 0000                      	nop
+                                 fin:
+000043 cffc                      	rjmp loop2
                                  
                                  ;RUTINAS
                                  ;-------------------------------------------------------------------------------------
@@ -1051,22 +1073,80 @@ AVRASM ver. 2.2.8  C:\Users\Rodrigo\Documents\Atmel Studio\7.0\AssemblerApplicat
                                  ; Esta rutina por ahora no hace casi nada, Ud puede ir agregando funcionalidades.
                                  ; Por ahora solo: cambia el valor de un LED en la placa, e incrementa un contador en r24.
                                  
-                                 _tmr0_int:	
-000030 b70f                      		in		r16, SREG; guardar el contexto cuando se entra en la interrupción, SREG = CONTEXTO que va al r16.
-                                 		; AHORA HACEMOS LA INTERRUPCION YA CON EL CONTEXTO GUARDADO
-000031 9583                      L0:		inc		r24	 ;cuento cuántas veces entré en la rutina.	
-                                 L1:
-000032 378d                      		cpi		r24, 125	
-                                 L2:
-000033 f7f1                      		brne	L1		
-000034 9a1b                      		sbi		PINB,	3			;toggle LED
+                                 _tmr0_int: ;interrupt del timer
+000044 b71f                      	in r17,SREG 			;este es el contexto
+000045 9583                      	inc	r24					
+000046 378d                      	cpi	r24,125				;comparamos
+000047 f009                      	breq count_secs	;aca comparamos el count_secs con 125, si es 125 
+000048 c01b                      	rjmp _tmr0_out
                                  
-                                 		; PRONTA LA INTERRUPCIÓN, TENEMOS QUE RECUPERAR EL CONTEXTO QUE HABIA EN SREG
-000035 bf0f                      		out		SREG, r16; out = recupera lo que estaba en r16, lo guarda en SREG con los valores originales, porque SREG se modificó durante la interrupción
+                                 count_secs:
+000049 9a1d                      	sbi PINB, 5
+00004a 9523                      	inc r18; para 2 seg
+00004b 9533                      	inc r19; para 4 seg
+00004c 9543                      	inc r20; para 8 seg
+00004d c000                      	rjmp cambio_led
                                  
+                                 cambio_led:
+00004e 3022                      	cpi r18, 2
+00004f f039                      	breq cambio_led2
+000050 3034                      	cpi r19, 4
+000051 f041                      	breq cambio_led3
+000052 3048                      	cpi r20, 8
+000053 f049                      	breq cambio_led4
+000054 304f                      	cpi r20, 15
+000055 f051                      	breq reiniciar_count
+000056 c00d                      	rjmp _tmr0_out
+                                 
+                                 cambio_led2:
+000057 9a1c                      	sbi PINB, 4
+000058 e020                      	ldi r18, 0
+000059 cff4                      	rjmp cambio_led
+                                 
+                                 cambio_led3:
+00005a 9a1b                      	sbi PINB, 3
+00005b e030                      	ldi r19, 0
+00005c cff1                      	rjmp cambio_led
+                                 
+                                 cambio_led4:
+00005d 9a1a                      	sbi PINB, 2
+00005e e040                      	ldi r20, 0
+00005f cfee                      	rjmp cambio_led
+                                 
+                                 reiniciar_count:
+000060 e020                      	ldi r18, 0
+000061 e030                      	ldi r19, 0
+000062 e040                      	ldi r20, 0
+000063 c000                      	rjmp _tmr0_out
                                  
                                  _tmr0_out:
-000036 9518                      	    reti						;retorno de la rutina de interrupción del Timer0
+000064 bf1f                      	out	SREG,r17			   
+000065 9518                      	reti						;retorno de la rutina de interrupción del Timer0
+                                 
+                                 interrupcion_externa:
+                                 					
+000066 b71f                      	in r17,SREG 	
+000067 c000                      	rjmp wait
+                                 					
+                                 wait:
+000068 9b31                      	sbis PINC, 1
+000069 c003                      	rjmp salir
+00006a 9b33                      	sbis PINC, 3
+00006b c003                      	rjmp reiniciar
+00006c cffb                      	rjmp wait
+                                 								
+                                 salir:
+00006d bf1f                      	out SREG,r17
+00006e 9518                      	reti
+                                 
+                                 reiniciar:
+00006f e020                      	ldi r18, 0
+000070 e030                      	ldi r19, 0
+000071 e040                      	ldi r20, 0
+000072 e30c                      	ldi r16, 0b00111100
+000073 b905                      	out PORTB, r16
+000074 cff8                      	rjmp salir
+                                 	
 
 
 RESOURCE USE INFORMATION
@@ -1086,37 +1166,37 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  15 r17:   0 r18:   0 r19:   0 r20:   0 
+r13:   0 r14:   0 r15:   0 r16:  20 r17:   4 r18:   6 r19:   6 r20:   7 
 r21:   0 r22:   0 r23:   0 r24:   3 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
-Registers used: 2 out of 35 (5.7%)
+Registers used: 6 out of 35 (17.1%)
 
 "ATmega328P" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :   5 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
 brne  :   1 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :   1 cpse  :   0 dec   :   0 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   1 inc   :   1 jmp   :   2 
-ld    :   0 ldd   :   0 ldi   :   7 lds   :   0 lpm   :   0 lsl   :   0 
+cpi   :   5 cpse  :   0 dec   :   0 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   2 inc   :   4 jmp   :   3 
+ld    :   0 ldd   :   0 ldi   :  22 lds   :   0 lpm   :   0 lsl   :   0 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   7 pop   :   0 
-push  :   0 rcall :   0 ret   :   0 reti  :   1 rjmp  :   1 rol   :   0 
-ror   :   0 sbc   :   0 sbci  :   0 sbi   :   1 sbic  :   0 sbis  :   0 
+neg   :   0 nop   :  10 or    :   0 ori   :   1 out   :   9 pop   :   0 
+push  :   0 rcall :   0 ret   :   0 reti  :   2 rjmp  :  13 rol   :   0 
+ror   :   0 sbc   :   0 sbci  :   0 sbi   :   4 sbic  :   0 sbis  :   2 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
-sez   :   0 sleep :   1 spm   :   0 st    :   0 std   :   0 sts   :   1 
+sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   3 
 sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 13 out of 113 (11.5%)
+Instructions used: 16 out of 113 (14.2%)
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00006e     58      0     58   32768   0.2%
+[.cseg] 0x000000 0x0000ea    186      0    186   32768   0.6%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 
