@@ -1,0 +1,41 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.1.506\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.1.506\avrasm\inc\m328Pdef.inc</FILE>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.1.506\avrasm\inc\./m328Pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\Debug\laboratorio1.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>laboratorio1.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>laboratorio1.map</FILE>
+  <FILE>laboratorio1.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <setup><FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</FILE><LINE>10</LINE></setup>
+  <start><FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</FILE><LINE>16</LINE></start>
+  <prendo1><FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</FILE><LINE>21</LINE></prendo1>
+  <delay><FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</FILE><LINE>64</LINE></delay>
+  <prendo2><FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</FILE><LINE>26</LINE></prendo2>
+  <prendo3><FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</FILE><LINE>31</LINE></prendo3>
+  <prendo4><FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</FILE><LINE>36</LINE></prendo4>
+  <prendo1r><FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</FILE><LINE>41</LINE></prendo1r>
+  <prendo2r><FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</FILE><LINE>46</LINE></prendo2r>
+  <prendo3r><FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</FILE><LINE>51</LINE></prendo3r>
+  <prendo4r><FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</FILE><LINE>56</LINE></prendo4r>
+  <L1><FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</FILE><LINE>68</LINE></L1>
+  <L2><FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</FILE><LINE>72</LINE></L2>
+  <L3><FILE>c:\users\rodrigo\Documents\Atmel Studio\7.0\laboratorio1\laboratorio1\main.asm</FILE><LINE>75</LINE></L3>
+ </LABELS>
+</ASSEMBLER_INFO>
