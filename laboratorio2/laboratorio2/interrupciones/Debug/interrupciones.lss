@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm Tue Sep 19 20:47:49 2023
+AVRASM ver. 2.2.8  C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm Thu Sep 21 17:33:08 2023
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.1.506\avrasm\inc\m328Pdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.1.506\avrasm\inc\m328Pdef.inc'
@@ -1085,12 +1085,12 @@ AVRASM ver. 2.2.8  C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepcione
 00004a 9523                      	inc r18; para 2 seg
 00004b 9533                      	inc r19; para 4 seg
 00004c 9543                      	inc r20; para 8 seg
-00004d c000                      	rjmp cambio_led
+00004d c000                      	rjmp cambio_led ;aca vamos a empezar a cambiar los led
                                  
                                  cambio_led:
-00004e 3022                      	cpi r18, 2
-00004f f039                      	breq cambio_led2
-000050 3034                      	cpi r19, 4
+00004e 3022                      	cpi r18, 2 ;compara si el r18 vale 2
+00004f f039                      	breq cambio_led2 ;la instruccion anterior es igual, así que pasa a la siguiente instruccion
+000050 3034                      	cpi r19, 4; compara, 
 000051 f041                      	breq cambio_led3
 000052 3048                      	cpi r20, 8
 000053 f049                      	breq cambio_led4

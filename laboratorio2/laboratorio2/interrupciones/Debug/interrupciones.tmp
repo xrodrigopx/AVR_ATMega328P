@@ -1,43 +1,43 @@
 <ASSEMBLER_INFO>
  <VERSION>2.2.8</VERSION>
  <DEVICE>"ATmega328P"</DEVICE>
- <WORKING_DIR>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\Debug</WORKING_DIR>
+ <WORKING_DIR>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\Debug</WORKING_DIR>
  <INCLUDE_PATH>
   <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.1.506\avrasm\inc</DIR>
   <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
   <DIR></DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</SOURCE_FILE>
+ <SOURCE_FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.1.506\avrasm\inc\m328Pdef.inc</FILE>
  </INCLUDED_FILES>
  <OBJECT_FILES>
-  <FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\Debug\excepciones.obj</FILE>
+  <FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\Debug\interrupciones.obj</FILE>
  </OBJECT_FILES>
  <HEX_FILES>
-  <FILE>excepciones.hex</FILE>
+  <FILE>interrupciones.hex</FILE>
  </HEX_FILES>
  <OUTPUT_FILES>
-  <FILE>excepciones.map</FILE>
-  <FILE>excepciones.lss</FILE>
+  <FILE>interrupciones.map</FILE>
+  <FILE>interrupciones.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <start><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>21</LINE></start>
-  <interrupcion_externa><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>140</LINE></interrupcion_externa>
-  <_tmr0_int><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>90</LINE></_tmr0_int>
-  <comienzo><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>57</LINE></comienzo>
-  <loop1><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>60</LINE></loop1>
-  <loop2><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>70</LINE></loop2>
-  <fin><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>74</LINE></fin>
-  <count_secs><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>97</LINE></count_secs>
-  <_tmr0_out><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>136</LINE></_tmr0_out>
-  <cambio_led><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>104</LINE></cambio_led>
-  <cambio_led2><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>115</LINE></cambio_led2>
-  <cambio_led3><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>120</LINE></cambio_led3>
-  <cambio_led4><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>125</LINE></cambio_led4>
-  <reiniciar_count><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>130</LINE></reiniciar_count>
-  <wait><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>145</LINE></wait>
-  <salir><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>152</LINE></salir>
-  <reiniciar><FILE>C:\Users\Rodrigo\Desktop\laboratorio2\laboratorio2\excepciones\main.asm</FILE><LINE>156</LINE></reiniciar>
+  <start><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>21</LINE></start>
+  <interrupcion_externa><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>140</LINE></interrupcion_externa>
+  <_tmr0_int><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>90</LINE></_tmr0_int>
+  <comienzo><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>57</LINE></comienzo>
+  <loop1><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>60</LINE></loop1>
+  <loop2><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>70</LINE></loop2>
+  <fin><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>74</LINE></fin>
+  <count_secs><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>97</LINE></count_secs>
+  <_tmr0_out><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>136</LINE></_tmr0_out>
+  <cambio_led><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>104</LINE></cambio_led>
+  <cambio_led2><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>115</LINE></cambio_led2>
+  <cambio_led3><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>120</LINE></cambio_led3>
+  <cambio_led4><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>125</LINE></cambio_led4>
+  <reiniciar_count><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>130</LINE></reiniciar_count>
+  <wait><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>145</LINE></wait>
+  <salir><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>152</LINE></salir>
+  <reiniciar><FILE>C:\Users\Rodrigo\Documents\Atmel Studio\7.0\laboratorio2\interrupciones\main.asm</FILE><LINE>156</LINE></reiniciar>
  </LABELS>
 </ASSEMBLER_INFO>
