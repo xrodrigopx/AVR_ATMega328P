@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.AVRAssembler</ToolchainName>
-    <ProjectGuid>59B1D629-9DCC-43ed-A0FD-8AB0E4D622AB</ProjectGuid>
+    <ProjectGuid>{c220be89-3464-4480-a6aa-9867c105add4}</ProjectGuid>
     <avrdeviceseries>none</avrdeviceseries>
     <avrdevice>ATmega328P</avrdevice>
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
@@ -80,26 +80,26 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrAssembler>
-  <avrasm.assembler.general.AdditionalIncludeDirectories>
-    <ListValues>
-      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\avrasm\inc</Value>
-    </ListValues>
-  </avrasm.assembler.general.AdditionalIncludeDirectories>
-  <avrasm.assembler.general.IncludeFile>m328Pdef.inc</avrasm.assembler.general.IncludeFile>
-</AvrAssembler>
+        <avrasm.assembler.general.AdditionalIncludeDirectories>
+          <ListValues>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\avrasm\inc</Value>
+          </ListValues>
+        </avrasm.assembler.general.AdditionalIncludeDirectories>
+        <avrasm.assembler.general.IncludeFile>m328Pdef.inc</avrasm.assembler.general.IncludeFile>
+      </AvrAssembler>
     </ToolchainSettings>
     <OutputType>Executable</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
       <AvrAssembler>
-  <avrasm.assembler.general.AdditionalIncludeDirectories>
-    <ListValues>
-      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\avrasm\inc</Value>
-    </ListValues>
-  </avrasm.assembler.general.AdditionalIncludeDirectories>
-  <avrasm.assembler.general.IncludeFile>m328Pdef.inc</avrasm.assembler.general.IncludeFile>
-</AvrAssembler>
+        <avrasm.assembler.general.AdditionalIncludeDirectories>
+          <ListValues>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\2.1.506\avrasm\inc</Value>
+          </ListValues>
+        </avrasm.assembler.general.AdditionalIncludeDirectories>
+        <avrasm.assembler.general.IncludeFile>m328Pdef.inc</avrasm.assembler.general.IncludeFile>
+      </AvrAssembler>
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>

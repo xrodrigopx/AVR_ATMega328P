@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Rodrigo\Documents\GitHub\AVR_ATMega328P\laboratorio2\laboratorio2\interrupciones\main.asm Tue Sep 26 17:58:11 2023
+AVRASM ver. 2.2.8  C:\Users\Rodrigo\Documents\GitHub\AVR_ATMega328P\laboratorio3\laboratorio3\main.asm Tue Sep 26 17:57:09 2023
 
 
 EQU  SIGNATURE_000 0000001e
@@ -695,20 +695,11 @@ EQU  ACIaddr      0000002e
 EQU  TWIaddr      00000030
 EQU  SPMRaddr     00000032
 EQU  INT_VECTORS_SIZE 00000034
-CSEG start        0000001e
-CSEG interrupcion_externa 00000066
-CSEG _tmr0_int    00000044
-CSEG comienzo     00000036
-CSEG loop1        00000037
-CSEG loop2        00000040
-CSEG fin          00000043
-CSEG count_secs   00000049
-CSEG _tmr0_out    00000064
-CSEG cambio_led   0000004e
-CSEG cambio_led2  00000057
-CSEG cambio_led3  0000005a
-CSEG cambio_led4  0000005d
-CSEG reiniciar_count 00000060
-CSEG wait         00000068
-CSEG salir        0000006d
-CSEG reiniciar    0000006f
+CSEG start        00000000
+CSEG apagar       00000009
+CSEG sacanum      00000012
+CSEG main         0000000d
+CSEG dato_serie   0000001a
+CSEG loop_dato1   0000001b
+CSEG loop_dato2   00000020
+CSEG loop_dato3   00000021
