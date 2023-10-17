@@ -2,18 +2,18 @@
 ; Menejo de display;
 ; Created: 29/9/2021 19:12:24
 ; Author: rperdomo
-; En este programa vamos a poner el n˙mero 0 en dÌgito display de m·s a la derecha, la idea es hacer un barrido bien r·pido
+; En este programa vamos a poner el n√∫mero 0 en d√≠gito display de m√°s a la derecha, la idea es hacer un barrido bien r√°pido
 
 .ORG 0x0000
 	jmp		start	; programa principal
 .ORG 0x0008			; Dir de memoria de la interrupcion de botones
 	jmp		pcint 
-.ORG 0x001C			;direcciÛn para la insterrupciones internas
+.ORG 0x001C			;direcci√≥n para la insterrupciones internas
 	jmp		_tmr0_int
 
 ;-------------
 
-; ac· empieza el programa
+; ac√° empieza el programa
 start:
 ;configuro los puertos:
 ;	PB2 PB3 PB4 PB5	- son los LEDs del shield
@@ -46,20 +46,20 @@ start:
 	sts		PCICR,	r17
 
 
-;Configuro el TMR0 y su interrupcion, esto est· sacado del lab 2
+;Configuro el TMR0 y su interrupcion, esto est√° sacado del lab 2
 
 	ldi		r16,	0b00000010
-	out		TCCR0A,	r16			;configuro para que cuente hasta OCR0A y vuelve a cero (reset on compare), ahÌ dispara la interrupciÛn
+	out		TCCR0A,	r16			;configuro para que cuente hasta OCR0A y vuelve a cero (reset on compare), ah√≠ dispara la interrupci√≥n
 	ldi		r16,	0b00000101	
 	out		TCCR0B,	r16			;prescaler = 1024
 	ldi		r16,	62			 ; modifico la interrupcion para actualizar el reloj mas rapido
 	out		OCR0A,	r16			;comparo con 63
 	ldi		r16,	0b00000010
-	sts		TIMSK0,	r16			;habilito la interrupciÛn (falta habilitar global)
+	sts		TIMSK0,	r16			;habilito la interrupci√≥n (falta habilitar global)
 
-;Inicializo algunos registros que voy a usar como variables para generar los n˙meros
+;Inicializo algunos registros que voy a usar como variables para generar los n√∫meros
 
-	ldi	r24, 0x00				;inicializo r24 para un contador genÈrico
+	ldi r24, 0x00				;inicializo r24 para un contador gen√©rico
 	ldi r25, 250				; contador para generar un segundo
 	ldi r29, 0b00000100
 	ldi r27, 0
@@ -69,7 +69,7 @@ start:
 	ldi r20, 0
 	ldi r19, 0
 
-;Programa principal ... ac· puedo hacer lo que quiero
+;Programa principal ... ac√° puedo hacer lo que quiero
 
 comienzo:
 	sei							;habilito las interrupciones globales
@@ -84,25 +84,25 @@ apagar:		; apaga todo el display de 7 segmentos
 
 ;-------------------------------------------------------------------------------------
 
-; Observar la rutina sacanum, utiliza r16 para los LEDs del numero que quiero mostar, r17 para indicar dÛnde lo quiero mostrar
-; En main: cargo en r16 los leds a encender para formar el '0', y en r17 indico es el primero de los 4 dÌgitos. 
-; Luego se llama la rutina de sacar la iformaciÛn serial.
+; Observar la rutina sacanum, utiliza r16 para los LEDs del numero que quiero mostar, r17 para indicar d√≥nde lo quiero mostrar
+; En main: cargo en r16 los leds a encender para formar el '0', y en r17 indico es el primero de los 4 d√≠gitos. 
+; Luego se llama la rutina de sacar la iformaci√≥n serial.
 ;
-; En el ejemplo para ver el numero 0, r16 debe ser 0b00000011 (orden de segmentos es abcdefgh, h es el punto), el binario va a representar un n˙mero al final
-; y r17 debe ser 0b00010000 (dÌgito display de m·s a la derecha)
+; En el ejemplo para ver el numero 0, r16 debe ser 0b00000011 (orden de segmentos es abcdefgh, h es el punto), el binario va a representar un n√∫mero al final
+; y r17 debe ser 0b00010000 (d√≠gito display de m√°s a la derecha)
 
 
 main:
-	;ldi r16,0b00000011		;aquÌ saco el '0' por el Display
+	;ldi r16,0b00000011		;aqu√≠ saco el '0' por el Display
 	nop
 	rjmp main;
 
 
 ;-------------------------------------------------------------------------------------
 
-; La rutina sacanum, envÌa lo que hay en r16 y r17 al display de 7 segmentos
-; r16 - contiene los LEDs a prender/apagar 0 - prende, 1 - apaga porque es un micro de c·todo com˙n
-; r17 - contiene el dÌgito: r17 = 1000xxxx led de mas a la izquierda, decimales de minutos 0100xxxx minutos led siguiente 0010xxxx siguiente a la derecha decimales de segundos 0001xxxx el de mas a la derecha del dÌgito menos al m·s significativo, los segundos.
+; La rutina sacanum, env√≠a lo que hay en r16 y r17 al display de 7 segmentos
+; r16 - contiene los LEDs a prender/apagar 0 - prende, 1 - apaga porque es un micro de c√°todo com√∫n
+; r17 - contiene el d√≠gito: r17 = 1000xxxx led de mas a la izquierda, decimales de minutos 0100xxxx minutos led siguiente 0010xxxx siguiente a la derecha decimales de segundos 0001xxxx el de mas a la derecha del d√≠gito menos al m√°s significativo, los segundos.
 
 sacanum: 
 	call	dato_serie
@@ -135,9 +135,9 @@ loop_dato3:
 
 pcint:
 	   in	r26, SREG		; guardo el contexto
-	   sbis PINC, 1     ;sbis prueba si un bit est· seteado y skipea en caso que si lo este
+	   sbis PINC, 1     ;sbis prueba si un bit est√° seteado y skipea en caso que si lo este
 	   ldi	r29,0b00000010
-	   sbis PINC, 2     ;prueba si el bit 2 est· seteado o no 
+	   sbis PINC, 2     ;prueba si el bit 2 est√° seteado o no 
 	   ldi	r29,0b00000100
 	   sbis PINC, 3
 	   call _reset_contador
@@ -160,7 +160,7 @@ _tmr0_int:
 
 _tmr0_out:
 		out SREG, r17
-	    reti						;retorno de la rutina de interrupciÛn del Timer0
+	    reti						;retorno de la rutina de interrupci√≥n del Timer0
 
 _1hz:
 	sbrs r29,2
@@ -170,7 +170,7 @@ _1hz:
 
 /*
  comparamos si lo que hay en el r23 es alguno de los numeros que asociamos a los dispalys 
- en caso que asÌ sea se env· al _pos_numero
+ en caso que as√≠ sea se env√° al _pos_numero
 */
 _act_display:
 	cpi r23, 1
@@ -278,8 +278,8 @@ _reset_contador:   ; resetea el contador cuando llega a	10:00
 	ret
 
 /*
- Esta interrupciÛn chequea que lo que hay en el registro es el numero que se pregunta al lado y en caso que sea igual va a la 
- interrupciÛn del numero y escribe ese n˙mero en la posicion que corresponde habiendo entrado a ella antes por _pos_numero
+ Esta interrupci√≥n chequea que lo que hay en el registro es el numero que se pregunta al lado y en caso que sea igual va a la 
+ interrupci√≥n del numero y escribe ese n√∫mero en la posicion que corresponde habiendo entrado a ella antes por _pos_numero
 */
 
 _traductor:
